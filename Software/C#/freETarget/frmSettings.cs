@@ -193,11 +193,12 @@ namespace freETarget
             }
 
             foreach (string target in allTargets) {
+                string displayName = shortTargetName(target);
                 if (activeTargets.Contains(target)) {
-                    lstbActiveTargets.Items.Add(target);
-                    cmbTargets.Items.Add(target);
+                    lstbActiveTargets.Items.Add(displayName);
+                    cmbTargets.Items.Add(displayName);
                 } else {
-                    lstbAllTargets.Items.Add(target);
+                    lstbAllTargets.Items.Add(displayName);
                 }
             }
         }

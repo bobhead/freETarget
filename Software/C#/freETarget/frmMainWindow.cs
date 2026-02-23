@@ -919,7 +919,11 @@ namespace freETarget {
                 //save active targets
                 List<string> activeTargets = new List<string>();
                 foreach (object ot in settingsFrom.lstbActiveTargets.Items) {
-                    activeTargets.Add((string)ot);
+                    string name = (string)ot;
+                    if (!name.StartsWith("freETarget.targets.")) {
+                        name = "freETarget.targets." + name;
+                    }
+                    activeTargets.Add(name);
                 }
                 storage.updateActiveTargets(activeTargets);
 
