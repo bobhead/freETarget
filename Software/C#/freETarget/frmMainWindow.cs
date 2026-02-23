@@ -915,6 +915,13 @@ namespace freETarget {
                 storage.updateActiveEvents(activeEvents);
                 eventManager.setActiveEventsList(storage.loadActiveEventsIDs());
 
+                //save active targets
+                List<string> activeTargets = new List<string>();
+                foreach (object ot in settingsFrom.lstbActiveTargets.Items) {
+                    activeTargets.Add((string)ot);
+                }
+                storage.updateActiveTargets(activeTargets);
+
             }
 
             settingsFrom.Dispose();

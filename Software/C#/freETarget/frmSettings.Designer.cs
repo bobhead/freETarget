@@ -81,6 +81,15 @@
             this.btnLeftToRight = new System.Windows.Forms.Button();
             this.lstbActiveEvents = new System.Windows.Forms.ListBox();
             this.lstbAllEvents = new System.Windows.Forms.ListBox();
+            this.tabActiveTargets = new System.Windows.Forms.TabPage();
+            this.lblActiveTargets = new System.Windows.Forms.Label();
+            this.lblAllTargets = new System.Windows.Forms.Label();
+            this.btnTargetRightToLeft = new System.Windows.Forms.Button();
+            this.btnTargetLeftToRight = new System.Windows.Forms.Button();
+            this.lstbActiveTargets = new System.Windows.Forms.ListBox();
+            this.lstbAllTargets = new System.Windows.Forms.ListBox();
+            this.btnTargetAllLeftToRight = new System.Windows.Forms.Button();
+            this.btnTargetAllRightToLeft = new System.Windows.Forms.Button();
             this.tabEvents = new System.Windows.Forms.TabPage();
             this.grpRapidFire = new System.Windows.Forms.GroupBox();
             this.label40 = new System.Windows.Forms.Label();
@@ -154,6 +163,7 @@
             this.grpTCP.SuspendLayout();
             this.grpUSB.SuspendLayout();
             this.tabActiveEvents.SuspendLayout();
+            this.tabActiveTargets.SuspendLayout();
             this.tabEvents.SuspendLayout();
             this.grpRapidFire.SuspendLayout();
             this.grpEvent.SuspendLayout();
@@ -165,7 +175,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(194, 522);
+            this.btnOK.Location = new System.Drawing.Point(344, 522);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -177,7 +187,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(273, 522);
+            this.btnCancel.Location = new System.Drawing.Point(423, 522);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -406,7 +416,7 @@
             this.groupBox1.Controls.Add(this.linkLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 426);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(337, 90);
+            this.groupBox1.Size = new System.Drawing.Size(487, 90);
             this.groupBox1.TabIndex = 33;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "About";
@@ -415,12 +425,13 @@
             // 
             this.tabControl1.Controls.Add(this.tabPageGeneral);
             this.tabControl1.Controls.Add(this.tabActiveEvents);
+            this.tabControl1.Controls.Add(this.tabActiveTargets);
             this.tabControl1.Controls.Add(this.tabEvents);
             this.tabControl1.Controls.Add(this.tabPageTarget);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(337, 410);
+            this.tabControl1.Size = new System.Drawing.Size(487, 410);
             this.tabControl1.TabIndex = 34;
             // 
             // tabPageGeneral
@@ -734,7 +745,108 @@
             this.lstbAllEvents.Size = new System.Drawing.Size(145, 303);
             this.lstbAllEvents.TabIndex = 0;
             this.lstbAllEvents.SelectedIndexChanged += new System.EventHandler(this.lstbAllEvents_SelectedIndexChanged);
-            // 
+            //
+            // tabActiveTargets
+            //
+            this.tabActiveTargets.Controls.Add(this.lblActiveTargets);
+            this.tabActiveTargets.Controls.Add(this.lblAllTargets);
+            this.tabActiveTargets.Controls.Add(this.btnTargetRightToLeft);
+            this.tabActiveTargets.Controls.Add(this.btnTargetLeftToRight);
+            this.tabActiveTargets.Controls.Add(this.btnTargetAllLeftToRight);
+            this.tabActiveTargets.Controls.Add(this.btnTargetAllRightToLeft);
+            this.tabActiveTargets.Controls.Add(this.lstbActiveTargets);
+            this.tabActiveTargets.Controls.Add(this.lstbAllTargets);
+            this.tabActiveTargets.Location = new System.Drawing.Point(4, 22);
+            this.tabActiveTargets.Name = "tabActiveTargets";
+            this.tabActiveTargets.Size = new System.Drawing.Size(479, 384);
+            this.tabActiveTargets.TabIndex = 5;
+            this.tabActiveTargets.Text = "Active Targets";
+            this.tabActiveTargets.UseVisualStyleBackColor = true;
+            //
+            // lblActiveTargets
+            //
+            this.lblActiveTargets.AutoSize = true;
+            this.lblActiveTargets.Location = new System.Drawing.Point(254, 2);
+            this.lblActiveTargets.Name = "lblActiveTargets";
+            this.lblActiveTargets.Size = new System.Drawing.Size(78, 13);
+            this.lblActiveTargets.TabIndex = 5;
+            this.lblActiveTargets.Text = "Active Targets";
+            //
+            // lblAllTargets
+            //
+            this.lblAllTargets.AutoSize = true;
+            this.lblAllTargets.Location = new System.Drawing.Point(4, 2);
+            this.lblAllTargets.Name = "lblAllTargets";
+            this.lblAllTargets.Size = new System.Drawing.Size(59, 13);
+            this.lblAllTargets.TabIndex = 4;
+            this.lblAllTargets.Text = "All Targets";
+            //
+            // btnTargetRightToLeft
+            //
+            this.btnTargetRightToLeft.Enabled = false;
+            this.btnTargetRightToLeft.Location = new System.Drawing.Point(227, 64);
+            this.btnTargetRightToLeft.Name = "btnTargetRightToLeft";
+            this.btnTargetRightToLeft.Size = new System.Drawing.Size(23, 24);
+            this.btnTargetRightToLeft.TabIndex = 3;
+            this.btnTargetRightToLeft.Text = "<";
+            this.btnTargetRightToLeft.UseVisualStyleBackColor = true;
+            this.btnTargetRightToLeft.Click += new System.EventHandler(this.btnTargetRightToLeft_Click);
+            //
+            // btnTargetLeftToRight
+            //
+            this.btnTargetLeftToRight.Enabled = false;
+            this.btnTargetLeftToRight.Location = new System.Drawing.Point(227, 34);
+            this.btnTargetLeftToRight.Name = "btnTargetLeftToRight";
+            this.btnTargetLeftToRight.Size = new System.Drawing.Size(23, 24);
+            this.btnTargetLeftToRight.TabIndex = 2;
+            this.btnTargetLeftToRight.Text = ">";
+            this.btnTargetLeftToRight.UseVisualStyleBackColor = true;
+            this.btnTargetLeftToRight.Click += new System.EventHandler(this.btnTargetLeftToRight_Click);
+            //
+            // btnTargetAllLeftToRight
+            //
+            this.btnTargetAllLeftToRight.Location = new System.Drawing.Point(227, 94);
+            this.btnTargetAllLeftToRight.Name = "btnTargetAllLeftToRight";
+            this.btnTargetAllLeftToRight.Size = new System.Drawing.Size(23, 24);
+            this.btnTargetAllLeftToRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.btnTargetAllLeftToRight.TabIndex = 6;
+            this.btnTargetAllLeftToRight.Text = ">>";
+            this.btnTargetAllLeftToRight.UseVisualStyleBackColor = true;
+            this.btnTargetAllLeftToRight.Click += new System.EventHandler(this.btnTargetAllLeftToRight_Click);
+            //
+            // btnTargetAllRightToLeft
+            //
+            this.btnTargetAllRightToLeft.Location = new System.Drawing.Point(227, 124);
+            this.btnTargetAllRightToLeft.Name = "btnTargetAllRightToLeft";
+            this.btnTargetAllRightToLeft.Size = new System.Drawing.Size(23, 24);
+            this.btnTargetAllRightToLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F);
+            this.btnTargetAllRightToLeft.TabIndex = 7;
+            this.btnTargetAllRightToLeft.Text = "<<";
+            this.btnTargetAllRightToLeft.UseVisualStyleBackColor = true;
+            this.btnTargetAllRightToLeft.Click += new System.EventHandler(this.btnTargetAllRightToLeft_Click);
+            //
+            // lstbActiveTargets
+            //
+            this.lstbActiveTargets.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.lstbActiveTargets, "Active targets shown in the event target dropdown");
+            this.lstbActiveTargets.Location = new System.Drawing.Point(254, 16);
+            this.lstbActiveTargets.Name = "lstbActiveTargets";
+            this.helpProvider.SetShowHelp(this.lstbActiveTargets, true);
+            this.lstbActiveTargets.Size = new System.Drawing.Size(220, 303);
+            this.lstbActiveTargets.TabIndex = 1;
+            this.lstbActiveTargets.SelectedIndexChanged += new System.EventHandler(this.lstbActiveTargets_SelectedIndexChanged);
+            //
+            // lstbAllTargets
+            //
+            this.lstbAllTargets.FormattingEnabled = true;
+            this.helpProvider.SetHelpString(this.lstbAllTargets, "All defined targets");
+            this.lstbAllTargets.Location = new System.Drawing.Point(3, 16);
+            this.lstbAllTargets.Name = "lstbAllTargets";
+            this.helpProvider.SetShowHelp(this.lstbAllTargets, true);
+            this.lstbAllTargets.Size = new System.Drawing.Size(220, 303);
+            this.lstbAllTargets.TabIndex = 0;
+            this.lstbAllTargets.SelectedIndexChanged += new System.EventHandler(this.lstbAllTargets_SelectedIndexChanged);
+            //
             // tabEvents
             // 
             this.tabEvents.Controls.Add(this.grpRapidFire);
@@ -1498,7 +1610,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 550);
+            this.ClientSize = new System.Drawing.Size(504, 550);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
@@ -1523,6 +1635,8 @@
             this.grpUSB.PerformLayout();
             this.tabActiveEvents.ResumeLayout(false);
             this.tabActiveEvents.PerformLayout();
+            this.tabActiveTargets.ResumeLayout(false);
+            this.tabActiveTargets.PerformLayout();
             this.tabEvents.ResumeLayout(false);
             this.tabEvents.PerformLayout();
             this.grpRapidFire.ResumeLayout(false);
@@ -1659,5 +1773,14 @@
         private System.Windows.Forms.GroupBox grpBoard;
         public System.Windows.Forms.RadioButton rbEsp;
         public System.Windows.Forms.RadioButton rbArduino;
+        private System.Windows.Forms.TabPage tabActiveTargets;
+        private System.Windows.Forms.Label lblActiveTargets;
+        private System.Windows.Forms.Label lblAllTargets;
+        private System.Windows.Forms.Button btnTargetRightToLeft;
+        private System.Windows.Forms.Button btnTargetLeftToRight;
+        public System.Windows.Forms.ListBox lstbActiveTargets;
+        private System.Windows.Forms.ListBox lstbAllTargets;
+        private System.Windows.Forms.Button btnTargetAllLeftToRight;
+        private System.Windows.Forms.Button btnTargetAllRightToLeft;
     }
 }
