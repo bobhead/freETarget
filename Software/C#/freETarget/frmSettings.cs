@@ -21,6 +21,22 @@ namespace freETarget
 
         frmMainWindow mainWindow;
 
+        private const string TARGET_PREFIX = "freETarget.targets.";
+
+        private string shortTargetName(string fullName) {
+            if (fullName.StartsWith(TARGET_PREFIX)) {
+                return fullName.Substring(TARGET_PREFIX.Length);
+            }
+            return fullName;
+        }
+
+        private string fullTargetName(string shortName) {
+            if (!shortName.StartsWith(TARGET_PREFIX)) {
+                return TARGET_PREFIX + shortName;
+            }
+            return shortName;
+        }
+
         private List<Control> eventControls = new List<Control>();
         private List<Control> eventRFControls = new List<Control>();
 
@@ -124,7 +140,7 @@ namespace freETarget
                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(targets.aTarget)))) {
                 //objects.Add((targets.aTarget)Activator.CreateInstance(type));
                 Console.WriteLine(type);
-                cmbTargets.Items.Add(type.ToString());
+                cmbTargets.Items.Add(shortTargetName(type.ToString()));
             }
 
             //load comms
@@ -488,7 +504,7 @@ namespace freETarget
                 cmbEventTypes.SelectedItem = ev.Type;
                 chkDecimalScoring.Checked = ev.DecimalScoring;
                 txtNoOfShots.Text = ev.NumberOfShots.ToString(CultureInfo.InvariantCulture);
-                cmbTargets.SelectedItem = ev.Target.getName();
+                cmbTargets.SelectedItem = shortTargetName(ev.Target.getName());
                 txtCaliber.Text = ev.ProjectileCaliber.ToString(CultureInfo.InvariantCulture);
                 txtMinutes.Text = ev.Minutes.ToString(CultureInfo.InvariantCulture);
                 cmbTabColor.SelectedItem = ev.TabColor.Name;
@@ -705,7 +721,7 @@ namespace freETarget
             int ev_NumberOfShots = Int32.Parse(txtNoOfShots.Text, CultureInfo.InvariantCulture);
             decimal ev_ProjectileCaliber = Decimal.Parse(txtCaliber.Text, CultureInfo.InvariantCulture);
 
-            Type target_type = Type.GetType((string)cmbTargets.SelectedItem);
+            Type target_type = Type.GetType(fullTargetName((string)cmbTargets.SelectedItem));
             targets.aTarget ev_Target = (targets.aTarget)Activator.CreateInstance(target_type, new object[] { ev_ProjectileCaliber });
             
             int ev_Minutes = Int32.Parse(txtMinutes.Text, CultureInfo.InvariantCulture);
