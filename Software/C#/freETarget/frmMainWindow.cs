@@ -869,6 +869,7 @@ namespace freETarget {
                 Properties.Settings.Default.fileLogging = settingsFrom.chkLog.Checked;
                 Properties.Settings.Default.ignoreMiss = settingsFrom.chkMiss.Checked;
                 Properties.Settings.Default.showScoring = settingsFrom.chkShowScoring.Checked;
+                Properties.Settings.Default.showTargetName = settingsFrom.chkShowTargetName.Checked;
 
                 if (Properties.Settings.Default.targetDistance != 100) {
                     btnConfig.BackColor = Properties.Settings.Default.targetColor;

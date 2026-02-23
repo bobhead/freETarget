@@ -246,6 +246,20 @@ namespace freETarget.targets {
 
             it.DrawRectangle(penBlack, 0, 0, dimension - 1, dimension - 1);
 
+            if (Settings.Default.showTargetName) {
+                string targetName = getName();
+                const string prefix = "freETarget.targets.";
+                if (targetName.StartsWith(prefix)) {
+                    targetName = targetName.Substring(prefix.Length);
+                }
+                Font nameFont = new Font("Arial", 8f);
+                SizeF textSize = it.MeasureString(targetName, nameFont);
+                float textX = 3;
+                float textY = dimension - textSize.Height - 3;
+                it.FillRectangle(brushWhite, textX, textY, textSize.Width, textSize.Height);
+                it.DrawString(targetName, nameFont, brushBlack, textX, textY);
+            }
+
             int index = 0;
             foreach (Shot shot in shotList) {
                 drawShot(shot, it, dimension, zoomFactor, index++, shotList);
