@@ -12,7 +12,8 @@ namespace freETarget {
         public enum EventType {
             Practice,
             Match,
-            Final
+            Final,
+            MatchWithSighters
         }
 
         public long ID { get; }

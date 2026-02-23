@@ -666,6 +666,7 @@ namespace freETarget
                         txtShotsSingles.Text = "-1";
                         break;
                     case Event.EventType.Match:
+                    case Event.EventType.MatchWithSighters:
                         txtShotPerSeries.Text = "-1";
                         txtSeriesDuration.Text = "-1";
                         txtShotsInSeries.Text = "-1";
@@ -893,6 +894,7 @@ namespace freETarget
                         txtShotsSingles.Enabled = false;
                         break;
                     case Event.EventType.Match:
+                    case Event.EventType.MatchWithSighters:
                         txtNoOfShots.Enabled = true;
                         txtMinutes.Enabled = true;
                         txtShotPerSeries.Enabled = false;
