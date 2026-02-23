@@ -1574,6 +1574,7 @@ namespace freETarget {
             btnResume.Enabled = false;
             trkZoom.Enabled = false;
             tcSessionType.Enabled = false;
+            btnMWSToggle.Visible = false;
             tcSessionType.Refresh();
 
             //initNewSession();
@@ -1611,6 +1612,7 @@ namespace freETarget {
             shotsList.Enabled = true;
             setTrkZoom(currentSession.getTarget());
             drawSessionName();
+            btnMWSToggle.Visible = false;
 
             shotsList.Items.Clear();
             shotsList.Refresh();
@@ -1949,6 +1951,14 @@ namespace freETarget {
                 currentSession = storage.findSession(sessionToBeResumed.id);
                 currentSession.repopulateSeries();
 
+
+                if (currentSession.sessionType == Event.EventType.MatchWithSighters) {
+                    currentSession.inSighterMode = false;
+                    btnMWSToggle.Visible = true;
+                    btnMWSToggle.Text = "Sighters";
+                } else {
+                    btnMWSToggle.Visible = false;
+                }
 
                 foreach (Shot s in currentSession.Shots) {
                     displayShotData(s);
