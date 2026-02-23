@@ -211,7 +211,8 @@ namespace freETarget.targets {
                 }
             }
 
-            if (currentSession.sessionType == Event.EventType.Practice) {
+            if (currentSession.sessionType == Event.EventType.Practice ||
+                (currentSession.sessionType == Event.EventType.MatchWithSighters && currentSession.inSighterMode)) {
                 //draw triangle in corner
                 float sixth = dimension / 6f;
                 PointF[] points = new PointF[3];

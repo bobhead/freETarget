@@ -935,7 +935,21 @@ namespace freETarget
             this.toolTipButtons.SetToolTip(this.btnResume, "Continues a previous saved session that was interupted");
             this.btnResume.UseVisualStyleBackColor = true;
             this.btnResume.Click += new System.EventHandler(this.btnResume_Click);
-            // 
+            //
+            // btnMWSToggle
+            //
+            this.btnMWSToggle = new System.Windows.Forms.Button();
+            this.btnMWSToggle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMWSToggle.Location = new System.Drawing.Point(763, 8);
+            this.btnMWSToggle.Name = "btnMWSToggle";
+            this.btnMWSToggle.Size = new System.Drawing.Size(80, 25);
+            this.btnMWSToggle.TabIndex = 50;
+            this.btnMWSToggle.Text = "Match";
+            this.toolTipButtons.SetToolTip(this.btnMWSToggle, "Switch between Sighter and Match mode");
+            this.btnMWSToggle.UseVisualStyleBackColor = true;
+            this.btnMWSToggle.Visible = false;
+            this.btnMWSToggle.Click += new System.EventHandler(this.btnMWSToggle_Click);
+            //
             // rapidFireTimer
             // 
             this.rapidFireTimer.Tick += new System.EventHandler(this.rapidFireTimer_Tick);
@@ -970,6 +984,7 @@ namespace freETarget
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 700);
+            this.Controls.Add(this.btnMWSToggle);
             this.Controls.Add(this.btnResume);
             this.Controls.Add(this.btnTargetSettings);
             this.Controls.Add(this.splitContainer);
@@ -1113,6 +1128,7 @@ namespace freETarget
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Timer rapidFireTimer;
         private System.Windows.Forms.Button btnResume;
+        private System.Windows.Forms.Button btnMWSToggle;
         private System.Windows.Forms.ImageList imgListBoards;
     }
 }

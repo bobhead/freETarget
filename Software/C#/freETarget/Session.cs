@@ -199,6 +199,53 @@ namespace freETarget {
 
         private List<List<Shot>> allSeries = new List<List<Shot>>();
 
+        // Match with Sighters state
+        public bool inSighterMode = false;
+        private List<Shot> matchShots = new List<Shot>();
+        private int matchScore = 0;
+        private decimal matchDecimalScore = 0;
+        private int matchInnerX = 0;
+        private List<Shot> matchCurrentSeries = new List<Shot>();
+        private List<List<Shot>> matchAllSeries = new List<List<Shot>>();
+
+        public void saveMatchState() {
+            matchShots = new List<Shot>(this.Shots);
+            matchScore = this.score;
+            matchDecimalScore = this.decimalScore;
+            matchInnerX = this.innerX;
+            matchCurrentSeries = new List<Shot>(this.CurrentSeries);
+            matchAllSeries = new List<List<Shot>>();
+            foreach (var series in this.AllSeries) {
+                matchAllSeries.Add(new List<Shot>(series));
+            }
+        }
+
+        public void restoreMatchState() {
+            this.Shots = new List<Shot>(matchShots);
+            this.score = matchScore;
+            this.decimalScore = matchDecimalScore;
+            this.innerX = matchInnerX;
+            this.CurrentSeries = new List<Shot>(matchCurrentSeries);
+            this.AllSeries = new List<List<Shot>>();
+            foreach (var series in matchAllSeries) {
+                this.AllSeries.Add(new List<Shot>(series));
+            }
+        }
+
+        public void clearForSighters() {
+            this.Shots.Clear();
+            this.score = 0;
+            this.decimalScore = 0;
+            this.innerX = 0;
+            this.CurrentSeries.Clear();
+            this.AllSeries.Clear();
+            this.AllSeries.Add(this.CurrentSeries);
+        }
+
+        public bool hasMatchShots() {
+            return matchShots.Count > 0;
+        }
+
         protected Session() {
             clear();
             RFseriesActive = false;
@@ -243,6 +290,13 @@ namespace freETarget {
             } else if (newSession.sessionType.Equals(Event.EventType.Match)) {
                 newSession.numberOfShots = eventType.NumberOfShots;
                 newSession.minutes = eventType.Minutes;
+                if (newSession.eventType.RapidFire) {
+                    newSession.vRO = new VirtualRO(newSession);
+                }
+            } else if (newSession.sessionType.Equals(Event.EventType.MatchWithSighters)) {
+                newSession.numberOfShots = eventType.NumberOfShots;
+                newSession.minutes = eventType.Minutes;
+                newSession.inSighterMode = true;
                 if (newSession.eventType.RapidFire) {
                     newSession.vRO = new VirtualRO(newSession);
                 }
@@ -366,7 +420,7 @@ namespace freETarget {
 
             if (sessionType == Event.EventType.Practice) {
                 c = Color.White;
-            }else if (sessionType == Event.EventType.Match) {
+            }else if (sessionType == Event.EventType.Match || sessionType == Event.EventType.MatchWithSighters) {
                 if (TimeSpan.Compare(ts, TimeSpan.FromSeconds(60)) <= 0) { //last 60 seconds displayed in red
                     c = Color.Red;
                 } else if (TimeSpan.Compare(ts, TimeSpan.FromMinutes(10)) <= 0) { //last 10 minutes displayed in orange

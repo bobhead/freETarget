@@ -1015,6 +1015,13 @@ namespace freETarget {
                 btnStart.Visible = false;
                 btnStart.Enabled = false;
             }
+
+            if (ev.Type == Event.EventType.MatchWithSighters) {
+                btnMWSToggle.Visible = true;
+                btnMWSToggle.Text = "Match";
+            } else {
+                btnMWSToggle.Visible = false;
+            }
         }
 
         private void setTrkZoom(targets.aTarget target) {
@@ -1087,6 +1094,12 @@ namespace freETarget {
             }
 
             currentSession.clear();
+            clearDisplayOnly();
+
+            return false;
+        }
+
+        private void clearDisplayOnly() {
             targetRefresh();
             shotsList.Items.Clear();
             shotsList.Refresh();
@@ -1107,8 +1120,39 @@ namespace freETarget {
             clearBreakdownChart();
             digitalClock.Value = "";
             digitalClock.ColorLight = Color.White;
+        }
 
-            return false;
+        private void btnMWSToggle_Click(object sender, EventArgs e) {
+            if (currentSession.inSighterMode) {
+                // Switching from Sighter to Match mode
+                currentSession.Shots.Clear();
+                currentSession.score = 0;
+                currentSession.decimalScore = 0;
+                currentSession.innerX = 0;
+                currentSession.CurrentSeries.Clear();
+                currentSession.AllSeries.Clear();
+                currentSession.inSighterMode = false;
+                clearDisplayOnly();
+
+                // Restore previous match shots if any
+                if (currentSession.hasMatchShots()) {
+                    currentSession.restoreMatchState();
+                    foreach (Shot s in currentSession.Shots) {
+                        displayShotData(s);
+                    }
+                    targetRefresh();
+                }
+
+                btnMWSToggle.Text = "Sighters";
+            } else {
+                // Switching from Match to Sighter mode
+                currentSession.saveMatchState();
+                currentSession.clearForSighters();
+                currentSession.inSighterMode = true;
+                clearDisplayOnly();
+
+                btnMWSToggle.Text = "Match";
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e) {
