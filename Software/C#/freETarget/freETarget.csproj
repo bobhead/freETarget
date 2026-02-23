@@ -149,6 +149,22 @@
     <Compile Include="targets\Rifle50m.cs" />
     <Compile Include="targets\Running10m.cs" />
     <Compile Include="targets\Ufolep10m.cs" />
+    <Compile Include="targets\NRA_A7.cs" />
+    <Compile Include="targets\NRA_A17.cs" />
+    <Compile Include="targets\NRA_A21.cs" />
+    <Compile Include="targets\NRA_A23.cs" />
+    <Compile Include="targets\NRA_A25.cs" />
+    <Compile Include="targets\NRA_A26.cs" />
+    <Compile Include="targets\NRA_A27.cs" />
+    <Compile Include="targets\NRA_A31.cs" />
+    <Compile Include="targets\NRA_A32.cs" />
+    <Compile Include="targets\NRA_A33.cs" />
+    <Compile Include="targets\NRA_A37.cs" />
+    <Compile Include="targets\NRA_A38.cs" />
+    <Compile Include="targets\NRA_A39.cs" />
+    <Compile Include="targets\NRA_A50.cs" />
+    <Compile Include="targets\NRA_A51.cs" />
+    <Compile Include="targets\USAS_50.cs" />
     <Compile Include="TransparentRTB.cs">
       <SubType>Component</SubType>
     </Compile>
