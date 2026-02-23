@@ -422,6 +422,47 @@ namespace freETarget {
             }
         }
 
+        public List<string> loadActiveTargets() {
+            List<string> ret = new List<string>();
+            SQLiteConnection con = new SQLiteConnection(connString);
+            con.Open();
+            try {
+                SQLiteCommand cmd = new SQLiteCommand("select TargetName from TargetTabs", con);
+                SQLiteDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read()) {
+                    ret.Add(rdr.GetString(0));
+                }
+                rdr.Close();
+            } catch (Exception) {
+                // TargetTabs table doesn't exist yet - return empty list (means all active)
+            }
+            con.Close();
+            return ret;
+        }
+
+        public void updateActiveTargets(List<string> targets) {
+            SQLiteConnection con = new SQLiteConnection(connString);
+            con.Open();
+            SQLiteCommand cmd = new SQLiteCommand(con);
+
+            try {
+                cmd.CommandText = "CREATE TABLE IF NOT EXISTS TargetTabs (TargetName TEXT)";
+                cmd.ExecuteNonQuery();
+            } catch (Exception) { }
+
+            cmd.CommandText = "DELETE FROM TargetTabs";
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+            foreach (string target in targets) {
+                cmd.CommandText = "INSERT INTO TargetTabs(TargetName) VALUES (@Name)";
+                cmd.Parameters.AddWithValue("@Name", target);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+            con.Close();
+        }
+
         public void storeSession(Session session, bool prepare) {
             SQLiteConnection con = new SQLiteConnection(connString);
             con.Open();

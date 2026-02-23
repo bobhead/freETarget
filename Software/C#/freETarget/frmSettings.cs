@@ -119,13 +119,8 @@ namespace freETarget
                 cmbEventTypes.Items.Add(et);
             }
 
-            //load targets 
-            foreach (Type type in Assembly.GetAssembly(typeof(targets.aTarget)).GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(targets.aTarget)))) {
-                //objects.Add((targets.aTarget)Activator.CreateInstance(type));
-                Console.WriteLine(type);
-                cmbTargets.Items.Add(type.ToString());
-            }
+            //load targets
+            loadTargets();
 
             //load comms
             cmbCommProtocol.Items.Add("USB");
@@ -157,6 +152,37 @@ namespace freETarget
 
                 lstbAllEvents.Items.Remove(ev);
                 lstbActiveEvents.Items.Add(ev);
+            }
+        }
+
+        private void loadTargets() {
+            lstbAllTargets.Items.Clear();
+            lstbActiveTargets.Items.Clear();
+            cmbTargets.Items.Clear();
+
+            // get all target types via reflection
+            List<string> allTargets = new List<string>();
+            foreach (Type type in Assembly.GetAssembly(typeof(targets.aTarget)).GetTypes()
+                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(targets.aTarget)))) {
+                allTargets.Add(type.ToString());
+            }
+            allTargets.Sort();
+
+            // get active targets from DB
+            List<string> activeTargets = mainWindow.storage.loadActiveTargets();
+
+            // if no active targets stored yet, treat all as active
+            if (activeTargets.Count == 0) {
+                activeTargets = new List<string>(allTargets);
+            }
+
+            foreach (string target in allTargets) {
+                if (activeTargets.Contains(target)) {
+                    lstbActiveTargets.Items.Add(target);
+                    cmbTargets.Items.Add(target);
+                } else {
+                    lstbAllTargets.Items.Add(target);
+                }
             }
         }
 
@@ -477,6 +503,53 @@ namespace freETarget
                     btnDown.Enabled = false;
                 }
             }
+        }
+
+        //---- ACTIVE TARGETS -----
+        private void btnTargetLeftToRight_Click(object sender, EventArgs e) {
+            string target = (string)lstbAllTargets.SelectedItem;
+            lstbActiveTargets.Items.Add(target);
+            lstbAllTargets.Items.Remove(target);
+            btnTargetLeftToRight.Enabled = false;
+        }
+
+        private void btnTargetRightToLeft_Click(object sender, EventArgs e) {
+            string target = (string)lstbActiveTargets.SelectedItem;
+            lstbAllTargets.Items.Add(target);
+            lstbActiveTargets.Items.Remove(target);
+            btnTargetRightToLeft.Enabled = false;
+        }
+
+        private void lstbAllTargets_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lstbAllTargets.SelectedItem != null) {
+                btnTargetLeftToRight.Enabled = true;
+                btnTargetRightToLeft.Enabled = false;
+                lstbActiveTargets.SelectedItem = null;
+            }
+        }
+
+        private void lstbActiveTargets_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lstbActiveTargets.SelectedItem != null) {
+                btnTargetLeftToRight.Enabled = false;
+                btnTargetRightToLeft.Enabled = true;
+                lstbAllTargets.SelectedItem = null;
+            }
+        }
+
+        private void btnTargetAllLeftToRight_Click(object sender, EventArgs e) {
+            while (lstbAllTargets.Items.Count > 0) {
+                lstbActiveTargets.Items.Add(lstbAllTargets.Items[0]);
+                lstbAllTargets.Items.RemoveAt(0);
+            }
+            btnTargetLeftToRight.Enabled = false;
+        }
+
+        private void btnTargetAllRightToLeft_Click(object sender, EventArgs e) {
+            while (lstbActiveTargets.Items.Count > 0) {
+                lstbAllTargets.Items.Add(lstbActiveTargets.Items[0]);
+                lstbActiveTargets.Items.RemoveAt(0);
+            }
+            btnTargetRightToLeft.Enabled = false;
         }
 
         private void lstbEvents_SelectedIndexChanged(object sender, EventArgs e) {
