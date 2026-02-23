@@ -56,6 +56,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.chkShowScoring = new System.Windows.Forms.CheckBox();
+            this.chkShowTargetName = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.grpTCP = new System.Windows.Forms.GroupBox();
             this.txtPort = new System.Windows.Forms.TextBox();
@@ -426,6 +427,7 @@
             // tabPageGeneral
             // 
             this.tabPageGeneral.Controls.Add(this.grpBoard);
+            this.tabPageGeneral.Controls.Add(this.chkShowTargetName);
             this.tabPageGeneral.Controls.Add(this.chkShowScoring);
             this.tabPageGeneral.Controls.Add(this.groupBox2);
             this.tabPageGeneral.Controls.Add(this.grpTCP);
@@ -465,7 +467,19 @@
             this.chkShowScoring.TabIndex = 38;
             this.chkShowScoring.Text = "Show scoring";
             this.chkShowScoring.UseVisualStyleBackColor = true;
-            // 
+            //
+            // chkShowTargetName
+            //
+            this.chkShowTargetName.AutoSize = true;
+            this.helpProvider.SetHelpString(this.chkShowTargetName, "If checked, displays the target type name on the target image");
+            this.chkShowTargetName.Location = new System.Drawing.Point(214, 153);
+            this.chkShowTargetName.Name = "chkShowTargetName";
+            this.helpProvider.SetShowHelp(this.chkShowTargetName, true);
+            this.chkShowTargetName.Size = new System.Drawing.Size(116, 17);
+            this.chkShowTargetName.TabIndex = 39;
+            this.chkShowTargetName.Text = "Show target name";
+            this.chkShowTargetName.UseVisualStyleBackColor = true;
+            //
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(16, 179);
@@ -1656,6 +1670,7 @@
         private System.Windows.Forms.TextBox txtRFNrShots;
         private System.Windows.Forms.CheckBox chkRapidFire;
         public System.Windows.Forms.CheckBox chkShowScoring;
+        public System.Windows.Forms.CheckBox chkShowTargetName;
         private System.Windows.Forms.GroupBox grpBoard;
         public System.Windows.Forms.RadioButton rbEsp;
         public System.Windows.Forms.RadioButton rbArduino;
